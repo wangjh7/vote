@@ -2,20 +2,27 @@ const express = require("express")
 const cookieParser = require("cookie-parser")
 const multer = require("multer")
 const fsp = require("fs").promises
+const fs = require('fs')
 const session = require("express-session")
 const svgCaptcha = require("svg-captcha")
 const cors = require('cors')
 const WebSocket = require('ws')
-const http = require('http')
+// const http = require('http')
+const https = require('https')
 const port = 8080
 //将express和websocket集成到http服务器上
 const app = express()
-const server = http.createServer(app)
-const wss = new WebSocket.Server({server})
+// const server = http.createServer(app)
+const httpsServer = https.createServer({
+  key:fs.readFileSync('/root/.acme.sh/johann.one/johann.one.key'),
+  cert:fs.readFileSync('/root/.acme.sh/johann.one/johann.one.cer'),
+},app)
+// const wss = new WebSocket.Server({server})
+const httpWss = new WebSocket.Server({httpsServer})
 
 //投票id 到 订阅这个投票信息更新的websocket 的映射
 let voteIdWsMap = {}
-wss.on('connection', async(ws,req)=>{
+httpWss.on('connection', async(ws,req)=>{
   voteId = req.url.split('/').slice(-1)[0]
   // console.log(`将会把${voteId}的实时信息发送到客户端`)
   let voteInfo = await db.get('SELECT rowid AS id, * FROM votes WHERE id = ?', voteId)
@@ -39,7 +46,7 @@ app.set("x-powered-by",false)
 app.locals.pretty = true
 
 let db
-const dbPromise = require("./bbs-api-db")
+const dbPromise = require("./vote-api-db")
 dbPromise.then(value=>{
   db = value
 })
@@ -413,7 +420,8 @@ app.route("/security-center/:id")
     })
   })
 
-server.listen(port,()=>{
+httpsServer.listen(port,()=>{
   console.log("listening on port ",port)
 })
+
  
