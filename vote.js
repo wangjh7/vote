@@ -18,7 +18,7 @@ const httpsServer = https.createServer({
   cert:fs.readFileSync('/root/.acme.sh/johann.one/johann.one.cer'),
 },app)
 // const wss = new WebSocket.Server({server})
-const httpWss = new WebSocket.Server({httpsServer})
+const httpWss = new WebSocket.Server({server:httpsServer})
 
 //投票id 到 订阅这个投票信息更新的websocket 的映射
 let voteIdWsMap = {}
