@@ -164,7 +164,7 @@ router.route("/signup")
     try{
       await db.run(
         `INSERT INTO users VALUES (?, ?, ?, ?)`,
-        [user.username,user.password,user.email,"/uploads/avatar.png"]
+        [user.username,user.password,user.email,"/vote/uploads/avatar.png"]
         )
       //如果上面报错，下面就不走了，如果没报错，那就注册成功了
       
@@ -304,7 +304,7 @@ router.post("/uploads",uploader.single("avatar"),async(req,res,next)=>{
   // res.end("ok")
   let targetName = file.path + "-" + file.originalname
   await fsp.rename(file.path, targetName)
-  let fileOnlineUrl = "/uploads/" + file.filename + "-" + file.originalname
+  let fileOnlineUrl = "/vote/uploads/" + file.filename + "-" + file.originalname
   try{
     await db.run(
       `update users set avatar = ? where name = ?`,
