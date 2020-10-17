@@ -14,7 +14,7 @@ const httpsServer = https.createServer({
   cert:fs.readFileSync('/root/.acme.sh/johann.one/johann.one.cer'),
 },app)
 // const wss = new WebSocket.Server({server})
-const httpWss = new WebSocket.Server({server:httpsServer,'Access-Control-Allow-Origin': "*"})
+const httpWss = new WebSocket.Server({server:httpsServer})
 
 let db
 const dbPromise = require("./vote-api-db")
