@@ -25,11 +25,7 @@ router.use((req,res,next)=>{
 //   credentials:true
 // }))
 
-router.use(express.static(__dirname + "/build"))
-router.use(express.static(__dirname + "/static"))
-router.use("/uploads",express.static(__dirname + "/uploads")) //上传的文件都在uploads文件夹，作为静态文件服务出来
-router.use(express.json()) //解析jquery的表单请求 Content-Type: application/json 
-router.use(express.urlencoded({extended:true})) //解析普通表单请求 Content-Type: application/x-www-form-urlencoded
+
 router.use(cookieParser("gouliguojiashengsiyi"))
 router.use(session())
 
