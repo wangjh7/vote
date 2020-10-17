@@ -5,6 +5,7 @@ const session = require("express-session")
 const svgCaptcha = require("svg-captcha")
 const express = require('express')
 // const cors = require('cors')
+let {voteIdWsMap} = require('./vote')
 
 
 const uploader = multer({dest:__dirname + "/uploads/"})

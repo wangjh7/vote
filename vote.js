@@ -58,3 +58,5 @@ app.use('/vote',router)
 httpsServer.listen(port,()=>{
   console.log("listening on port ",port)
 })
+
+module.exports = voteIdWsMap
