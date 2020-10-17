@@ -11,14 +11,6 @@ const httpsServer = https.createServer({
   cert:fs.readFileSync('/root/.acme.sh/johann.one/johann.one.cer'),
 },app)
 
-
-let db
-const dbPromise = require("./vote-api-db")
-dbPromise.then(value=>{
-  db = value
-})
-
-
 //投票id 到 订阅这个投票信息更新的websocket 的映射
 let voteIdWsMap = {}
 

@@ -3,6 +3,11 @@ const {httpsServer} = require('./vote')
 const WebSocket = require('ws')
 const voteIdWsMap =  require( './vote')
 
+let db
+const dbPromise = require("./vote-api-db")
+dbPromise.then(value=>{
+  db = value
+})
 
 const httpWss = new WebSocket.Server({server:httpsServer})
 httpWss.on('connection', async(ws,req)=>{
