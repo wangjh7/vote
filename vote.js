@@ -59,4 +59,4 @@ httpsServer.listen(port,()=>{
   console.log("listening on port ",port)
 })
 
-module.exports = voteIdWsMap
+export {voteIdWsMap}
