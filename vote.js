@@ -43,11 +43,11 @@ httpWss.on('connection', async(ws,req)=>{
   })
 })
 
-app.use(express.static(__dirname + "/build"))
-app.use(express.static(__dirname + "/static"))
-app.use("/uploads",express.static(__dirname + "/uploads")) //上传的文件都在uploads文件夹，作为静态文件服务出来
-app.use(express.json()) //解析jquery的表单请求 Content-Type: application/json 
-app.use(express.urlencoded({extended:true})) //解析普通表单请求 Content-Type: application/x-www-form-urlencoded
+app.use("/vote",express.static(__dirname + "/build"))
+app.use("/vote",express.static(__dirname + "/static"))
+app.use("/vote/uploads",express.static(__dirname + "/uploads")) //上传的文件都在uploads文件夹，作为静态文件服务出来
+app.use("/vote",express.json()) //解析jquery的表单请求 Content-Type: application/json 
+app.use("/vote",express.urlencoded({extended:true})) //解析普通表单请求 Content-Type: application/x-www-form-urlencoded
 
 app.set("x-powered-by",false)
 app.locals.pretty = true
