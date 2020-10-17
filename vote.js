@@ -5,7 +5,6 @@ const WebSocket = require('ws')
 const https = require('https')
 const router = require('./vote-router')
 
-const port = 8080
 const app = express()
 
 // const server = http.createServer(app)
@@ -54,9 +53,5 @@ app.locals.pretty = true
 app.use('/vote',router)
 
 
-
-httpsServer.listen(port,()=>{
-  console.log("listening on port ",port)
-})
-
-export {voteIdWsMap}
+exports.voteIdWsMap = voteIdWsMap
+exports.httpsServer = httpsServer
